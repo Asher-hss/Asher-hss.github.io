@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Asher Blog</title>
+    <description>好好生活</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 07 Feb 2024 14:35:47 -0800</pubDate>
+    <lastBuildDate>Wed, 07 Feb 2024 14:35:47 -0800</lastBuildDate>
+    <generator>Jekyll v4.3.3</generator>
+    
+      <item>
+        <title>use svg in react project</title>
+        <description>&lt;p&gt;&lt;br /&gt;记录一下上次遇到的问题,作为小白，了解与认识极为有限，有空进行内容的补充。
+&lt;br /&gt;此情况出现在我需要将svg文件作为组件加入项目中。
+&lt;br /&gt;该项目基于next.js脚手架创建。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;先简单介绍一下svg：
+&lt;br /&gt;SVG 是一种基于 XML 语法的图像格式，全称是可缩放矢量图（Scalable Vector Graphics）。其他图像格式都是基于像素处理的，SVG 则是属于对图像的形状描述，所以它本质上是文本文件，体积较小，且不管放大多少倍都不会失真。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;直接将svg文件加入项目中，会出现报错：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;Error: Element type is invalid: expected a string (for built-in components) or a class/function (for compositecomponents) but got: object
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;这种情况，我们需要对配置文件进行一定的修改，打开next.config.js文件，加入如下内容即可。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;const nextConfig = {
+    webpack(config) {
+        config.module.rules.push({
+            test: /\.svg$/,
+            use: [&quot;@svgr/webpack&quot;],
+        });
+        return config;
+    }
+}
+module.exports = nextConfig
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;此时我们可以在tsx文件中将svg作为组件正常导入, from后面请设置正确路径。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;import xxx from &quot;../../../xxx.svg&quot;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Thu, 01 Feb 2024 00:00:00 -0800</pubDate>
+        <link>http://localhost:4000/2024/02/01/next.js_react_svg/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024/02/01/next.js_react_svg/</guid>
+        
+        <category>react</category>
+        
+        <category>next.js</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>use Google Analytics in react project</title>
+        <description>&lt;div&gt;
+&lt;br /&gt;最近做react项目的时候，新增了一个需求。
+&lt;br /&gt;需要使用进行网站数据的统计，这里选择了google analytics，baidu analytics同理。
+&lt;br /&gt;省去前面的步骤，google analytics会提示我们直接加入下面代码在head后面。
+
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.googletagmanager.com/gtag/js?id=G-xxxxxx&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dataLayer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dataLayer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;gtag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dataLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);}&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;gtag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;gtag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;G-xxxxxx&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+
+&lt;br /&gt;但是呢，直接加入是没有效果，这是因为在JSX中直接写入脚本标签会被处理为文本内容，因此需要做以下修改:
+
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Head&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.googletagmanager.com/gtag/js?id=G-xxxxxx&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;script
+            &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dangerouslySetInnerHTML=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;__html:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;window.dataLayer = &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;window.dataLayer&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;[];&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;gtag&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(){&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dataLayer.push&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;);}&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;gtag&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&apos;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&apos;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;());&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;gtag&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&apos;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&apos;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;G-FFPXB3TZP8&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&apos;);&lt;/span&gt;
+                &lt;span class=&quot;err&quot;&gt;`,&lt;/span&gt;
+            &lt;span class=&quot;err&quot;&gt;}}&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/Head&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+
+&lt;br /&gt;这样就可以了,此时可以在google analytics里使用test进行测试。
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 01 Feb 2024 00:00:00 -0800</pubDate>
+        <link>http://localhost:4000/2024/02/01/google_analytics_and_react/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024/02/01/google_analytics_and_react/</guid>
+        
+        <category>react</category>
+        
+        <category>Google Analytics</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>My First Post</title>
+        <description>&lt;h2 id=&quot;hey&quot;&gt;Hey&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;这是我的第一篇博客。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;进入你的博客主页，新的文章将会出现在你的主页上.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 31 Jan 2024 00:00:00 -0800</pubDate>
+        <link>http://localhost:4000/2024/01/31/first_post/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024/01/31/first_post/</guid>
+        
+        <category>生活</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
