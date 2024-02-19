@@ -1,6 +1,30 @@
 [
   
     {
+      "title"    : "PromoPro System",
+      "subtitle" : "对于PromoPro System项目的简易说明",
+      "tags"     : "React, SpringBoot, DDD",
+      "url"      : "/2024/02/15/PromoPro-System/",
+      "date"     : "2024-02-15 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "ChatMate AI",
+      "subtitle" : "对于ChatMate AI项目的简易说明",
+      "tags"     : "React, SpringBoot, DDD",
+      "url"      : "/2024/02/10/ChatMate-AI/",
+      "date"     : "2024-02-10 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "Kafka Study Notes",
+      "subtitle" : "对于项目中使用的Kafka的记录",
+      "tags"     : "Kafka, SpringBoot",
+      "url"      : "/2024/02/07/kafka_learn/",
+      "date"     : "2024-02-07 00:00:00 -0800"
+    } ,
+  
+    {
       "title"    : "use svg in react project",
       "subtitle" : "关于我在react项目中加入svg组件的那点事",
       "tags"     : "react, next.js",
